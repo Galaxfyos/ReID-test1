@@ -16,7 +16,7 @@ from random import shuffle
 import numpy as np
 import pickle
 import transformers as ppb
-
+#怎么导入
 
 ImageDecodeData = namedtuple('ImageDecodeData', ['id', 'image_path', 'captions_id', 'split'])
 
