@@ -90,10 +90,10 @@ if __name__ == '__main__':
         # opt.class_num = 2802
         # opt.vocab_size = 2300
     elif opt.dataset == 'CUHK-PEDES':
-        opt.pkl_root = '/home/zhiyin/tran_ACMMM/processed_data_singledata_CUHK/'  # same_id_new_
+        opt.pkl_root = './processed_data_singledata_CUHK/'  # xfy  # same_id_new_
         opt.class_num = 11000
         opt.vocab_size = 5000
-        opt.dataroot = '/home/zhiyin/CUHK-PEDES'
+        opt.dataroot = '/home/common-dir/xufayou/LGUR_v1/datasets/CUHK-PEDES'  # xfy,按照实际路径改
 
     opt.d_model = 1024
     opt.nhead = 4
@@ -120,7 +120,7 @@ if __name__ == '__main__':
     opt.epoch = 60
     opt.epoch_decay = [20, 40, 50]
 
-    opt.batch_size = 64
+    opt.batch_size = 16  #xfy,64
     opt.start_epoch = 0
     opt.trained = False
 
@@ -183,7 +183,7 @@ if __name__ == '__main__':
         pred_i2t_local_sum = 0
         pred_t2i_local_sum = 0
 
-        scheduler.step()
+        # scheduler.step()
         for param in optimizer.param_groups:
             logging.info('lr:{}'.format(param['lr']))
 
@@ -237,7 +237,7 @@ if __name__ == '__main__':
             id_loss_sum += id_loss
             pred_i2t_local_sum += pred_i2t_local
             pred_t2i_local_sum += pred_t2i_local
-
+        scheduler.step()  #xfy
         ranking_loss_avg = ranking_loss_sum / (times + 1)
         id_loss_avg = id_loss_sum / (times + 1)
         pred_i2t_local_avg = pred_i2t_local_sum / (times + 1)

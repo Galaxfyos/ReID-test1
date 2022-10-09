@@ -225,7 +225,7 @@ class PostProcessSegm(nn.Module):
         assert len(orig_target_sizes) == len(max_target_sizes)
         max_h, max_w = max_target_sizes.max(0)[0].tolist()
         outputs_masks = outputs["pred_masks"].squeeze(2)
-        outputs_masks = F.interpolate(outputs_masks, size=(max_h, max_w), mode="bilinear", align_corners=False)
+        outputs_masks = F.interpolate(outputs_masks, size=(max_h, max_w), mode="bilinear", align_corners=True)  #xfy,修改False为True，即align_corners=True
         outputs_masks = (outputs_masks.sigmoid() > self.threshold).cpu()
 
         for i, (cur_mask, t, tt) in enumerate(zip(outputs_masks, max_target_sizes, orig_target_sizes)):
@@ -284,7 +284,7 @@ class PostProcessPanoptic(nn.Module):
             cur_scores = cur_scores[keep]
             cur_classes = cur_classes[keep]
             cur_masks = cur_masks[keep]
-            cur_masks = interpolate(cur_masks[:, None], to_tuple(size), mode="bilinear").squeeze(1)
+            cur_masks = interpolate(cur_masks[:, None], to_tuple(size), mode="bilinear", align_corners=True).squeeze(1)  # xfy,新增参数align_corners=True
             cur_boxes = box_ops.box_cxcywh_to_xyxy(cur_boxes[keep])
 
             h, w = cur_masks.shape[-2:]

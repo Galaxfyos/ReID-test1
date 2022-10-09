@@ -8,7 +8,7 @@ Created on Thurs., Aug. 1(st), 2019 at 20:10
 @author: zifyloo
 """
 # xfy1
-from utils_VD.read_write_data import read_json, makedir, save_dict, write_txt
+from utils.read_write_data import read_json, makedir, save_dict, write_txt
 import argparse
 from collections import namedtuple
 import os
@@ -33,11 +33,11 @@ class Word2Index(object):
             return self.unk_id
         return self._vocab[word]
 
-
+# xfy,/home/common-dir/xufayou/LGUR_v1
 def parse_args():
     parser = argparse.ArgumentParser(description='Command for data pre_processing')
-    parser.add_argument('--img_root', default='/data1/zhiying/text-image/CUHK-PEDES/imgs', type=str)
-    parser.add_argument('--json_root', default='//data1/zhiying/text-image/CUHK-PEDES/reid_raw.json', type=str)
+    parser.add_argument('--img_root', default='./datasets/CUHK-PEDES/imgs', type=str)
+    parser.add_argument('--json_root', default='./datasets/CUHK-PEDES/reid_raw.json', type=str)
     parser.add_argument('--out_root', default='./processed_data_singledata_CUHK', type=str) # processed_data_spa_img
     parser.add_argument('--min_word_count', default='2', type=int)
     parser.add_argument('--shuffle', default=False, type=bool)

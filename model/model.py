@@ -159,7 +159,7 @@ class ft_net_TransREID_local_smallDeiT(nn.Module):
                                                         drop_rate= 0.0,
                                                         attn_drop_rate=0.0)
         self.in_planes = 768
-        model_path = '/home/zhiyin/deit_small_distilled_patch16_224-649709d9.pth'
+        model_path = '/home/common-dir/xufayou/LGUR_v1/deit_base_distilled_patch16_224-df68dfff.pth'
         model_ft.load_param(model_path)
         print('Loading pretrained ImageNet model......from {}'.format(model_path))
         # avg pooling to global pooling

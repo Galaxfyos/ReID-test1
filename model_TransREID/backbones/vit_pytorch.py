@@ -444,7 +444,8 @@ def resize_pos_embed(posemb, posemb_new, hight, width):
     gs_old = int(math.sqrt(len(posemb_grid)))
     print('Resized position embedding from size:{} to size: {} with height:{} width: {}'.format(posemb.shape, posemb_new.shape, hight, width))
     posemb_grid = posemb_grid.reshape(1, gs_old, gs_old, -1).permute(0, 3, 1, 2)
-    posemb_grid = F.interpolate(posemb_grid, size=(hight, width), mode='bilinear')
+    posemb_grid = F.interpolate(posemb_grid, size=(hight, width), mode='bilinear', align_corners=True) #xfy,新增参数align_corners=True
+
     posemb_grid = posemb_grid.permute(0, 2, 3, 1).reshape(1, hight * width, -1)
     posemb = torch.cat([posemb_token, posemb_grid], dim=1)
     return posemb
